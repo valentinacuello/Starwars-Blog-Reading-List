@@ -1,27 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import Cards from "./Cards";
 import "../../styles/home.scss";
-import injectContext from "../store/appContext";
+import { Context } from "../store/appContext";
 
 const Characters = () => {
-	// let { character, setCharacter } = useContext(injectContext);
+	const { store, actions } = useContext(Context);
 	return (
 		<div className="container-body">
 			<h1>Characters</h1>
 			<div className="container-characters">
 				<div className="row">
 					<div className="cards-list">
-						<Cards />
-						<Cards />
-						<Cards />
-						<Cards />
-						<Cards />
-						<Cards />
-						<Cards />
-						<Cards />
-						<Cards />
-						<Cards />
-						<Cards />
+						{store.personajes.map((personaje, index) => {
+							return <Cards key={index} name={personaje.name} index={index} />;
+						})}
 					</div>
 				</div>
 			</div>

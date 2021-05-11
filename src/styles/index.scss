@@ -1,6 +1,21 @@
 
 $black: #181717;
 
+body{
+        &::-webkit-scrollbar {
+           width: 12px;
+        }
+
+        &::-webkit-scrollbar:vertical {
+            height: 5px;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            background-color:  $black;  
+            border-radius: 10px;          
+        }
+}
+
 /*Site Background*/
 .site-body{
     background-color: $black;
@@ -66,15 +81,17 @@ nav{
 
     .container-characters, .container-planets{
         width: 80%;
-        height: 420px;
         overflow-y: scroll;
         display: flex;
             align-items: center;
             flex-direction: column;
+        margin-bottom: 1em;
+        
         
         .row{
             width: 100%;
             flex-wrap: nowrap;
+            padding-bottom: 1em;
 
             .cards-list{
                 display: flex;
@@ -93,6 +110,7 @@ nav{
         &::-webkit-scrollbar:horizontal {
             height: 10px;
         }
+        
         &::-webkit-scrollbar-thumb {
             background-color:  #fff;  
             border-radius: 10px;          
@@ -104,6 +122,19 @@ nav{
         
     }    
 
+}
+
+
+
+/*Card styles*/
+
+.card{
+    .btn-container{
+        button{
+            color: #fff;
+            font-weight: 600;
+        }
+    }
 }
 
 
