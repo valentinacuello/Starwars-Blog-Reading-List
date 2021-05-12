@@ -12,7 +12,15 @@ const Characters = () => {
 				<div className="row">
 					<div className="cards-list">
 						{store.personajes.map((personaje, index) => {
-							return <Cards key={index} name={personaje.name} index={index} />;
+							return (
+								<Cards
+									key={index}
+									name={personaje.name}
+									id={personaje.uid}
+									index={personaje.uid}
+									gender={personaje.properties != null ? personaje.properties.gender : ""}
+								/>
+							);
 						})}
 					</div>
 				</div>

@@ -1,18 +1,6 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
 			personajes: [],
 			planetas: []
 		},
@@ -46,24 +34,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 				try {
-					const personajeDetalles = getStore().personajes; //acá agarro a store y llamo a personajes (creo una copia)
-					for (const element of personajeDetalles) {
-						//un for para que recorra cada personaje y haga fetch a la url de ese personaje
-						const res = await fetch(element.url);
-						const data = await res.json(); //convierto el json a objeto
-						console.log(data);
-						element.properties = data.result.properties; //estoy creando la propiedad properties del elemento, donde guardare el resul.properties de cada personaje (esto viene de cada url que tiene cada personaje)
-					}
-					setStore({ personajes: personajeDetalles }); //y aca guardo la copia que ahora adentro tiene más detalles
+					const personajeDetalles = getStore().personajes;
+					Promise.all(
+						personajeDetalles.map(element => {
+							return new Promise(resolve => {
+								fetch(element.url).then(response => {
+									return new Promise(() => {
+										response.json().then(data => {
+											element.properties = data.result.properties;
+										});
+									});
+								});
+							});
+						})
+					);
+					setStore({ personajes: personajeDetalles });
 				} catch (error) {
 					console.log(error);
 				}
-
-				//                 await Promise.all(files.map(async (file) => {
-				//     const contents = await fs.readFile(file, 'utf8')
-				//     console.log(contents)
-				//   }));
 			},
+			// https://dev.to/askrishnapravin/for-loop-vs-map-for-making-multiple-api-calls-3lhd
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();

@@ -12,7 +12,7 @@ const Planets = () => {
 				<div className="row">
 					<div className="cards-list">
 						{store.planetas.map((planeta, index) => {
-							return <Cards key={index} name={planeta.name} index={index} />;
+							return <Cards key={index} name={planeta.name} id={planeta.uid} />;
 						})}
 					</div>
 				</div>
