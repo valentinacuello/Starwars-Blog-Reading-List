@@ -5,8 +5,10 @@ import "../../styles/home.scss";
 import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+	const { store, actions } = useContext(Context);
 	return (
 		<nav className="">
 			<Link to="/">
@@ -23,15 +25,9 @@ export const Navbar = () => {
 					Favorites
 				</button>
 				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a className="dropdown-item" href="#">
-						Action
-					</a>
-					<a className="dropdown-item" href="#">
-						Another action
-					</a>
-					<a className="dropdown-item" href="#">
-						Something else here
-					</a>
+					<ul>
+						<li>HOLA</li>
+					</ul>
 				</div>
 			</div>
 		</nav>

@@ -2,7 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			personajes: [],
-			planetas: []
+			planetas: [],
+			favoritos: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -52,8 +53,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log(error);
 				}
+				// https://dev.to/askrishnapravin/for-loop-vs-map-for-making-multiple-api-calls-3lhd
+				try {
+					const planetaDetalles = getStore().planetas;
+					Promise.all(
+						planetaDetalles.map(element => {
+							return new Promise(resolve => {
+								fetch(element.url).then(response => {
+									return new Promise(() => {
+										response.json().then(data => {
+											element.properties = data.result.properties;
+										});
+									});
+								});
+							});
+						})
+					);
+					setStore({ planetas: planetaDetalles });
+				} catch (error) {
+					console.log(error);
+				}
 			},
-			// https://dev.to/askrishnapravin/for-loop-vs-map-for-making-multiple-api-calls-3lhd
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
@@ -67,6 +88,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+
+			agregarFav: nuevoFav => {
+				const store = getStore();
+				let listaNuevaFavs = [...store.favoritos, nuevoFav];
+				setStore({ favoritos: listaNuevaFavs });
+				console.log(store.favoritos);
 			}
 		}
 	};

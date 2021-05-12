@@ -17,8 +17,13 @@ body{
 }
 
 /*Site Background*/
+#app{
+    background-image: url("https://image.freepik.com/free-vector/grunge-dusty-texture-background_1048-9793.jpg");
+    background-repeat: repeat;
+}
+
 .site-body{
-    background-color: $black;
+    height: fit-content;
     background-image: url("https://image.freepik.com/free-vector/grunge-dusty-texture-background_1048-9793.jpg");
     background-repeat: repeat;
 }
@@ -139,3 +144,7 @@ nav{
 
 
 
+/*Details styles*/
+.details-body{
+    margin-top: 8em;
+}

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Cards from "./Cards";
+import CardPl from "./CardPl";
 import "../../styles/home.scss";
 import { Context } from "../store/appContext";
 
@@ -12,7 +12,7 @@ const Planets = () => {
 				<div className="row">
 					<div className="cards-list">
 						{store.planetas.map((planeta, index) => {
-							return <Cards key={index} name={planeta.name} id={planeta.uid} />;
+							return <CardPl key={index} name={planeta.name} id={planeta.uid} />;
 						})}
 					</div>
 				</div>
