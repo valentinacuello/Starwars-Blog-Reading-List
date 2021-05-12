@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import "../../styles/home.scss";
@@ -9,6 +9,7 @@ import { Context } from "../store/appContext";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
+	const [listaFavs, setListaFavs] = useState([]);
 	return (
 		<nav className="">
 			<Link to="/">
@@ -26,7 +27,9 @@ export const Navbar = () => {
 				</button>
 				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<ul>
-						<li>HOLA</li>
+						{store.favoritos.map((favorito, index) => {
+							return <li key={index}>{favorito}</li>;
+						})}
 					</ul>
 				</div>
 			</div>
