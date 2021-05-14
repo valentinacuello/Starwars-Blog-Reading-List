@@ -1,5 +1,11 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
 $black: #181717;
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Oswald";
+}
 
 body{
         &::-webkit-scrollbar {
@@ -18,16 +24,20 @@ body{
 
 /*Site Background*/
 #app{
-    background-image: url("https://image.freepik.com/free-vector/grunge-dusty-texture-background_1048-9793.jpg");
-    background-repeat: repeat;
+    background: fixed url("https://image.freepik.com/free-vector/grunge-dusty-texture-background_1048-9793.jpg") repeat;
 }
+   
 
 .site-body{
     height: fit-content;
-    background-image: url("https://image.freepik.com/free-vector/grunge-dusty-texture-background_1048-9793.jpg");
-    background-repeat: repeat;
+    background: fixed url("https://image.freepik.com/free-vector/grunge-dusty-texture-background_1048-9793.jpg") repeat;
+
 }
 
+
+.body{
+    margin-top: 8em;
+}
 
 /*NavBar*/
 nav{
@@ -52,20 +62,47 @@ nav{
         button{
             color: #fff;
             text-transform: uppercase;
-            font-weight: 600;
-        }
+            font-weight: 500;
 
-        &:hover{
-            background-color: #fff;        
+            &:hover{
+                background-color: #fff;
+                color: #181717;
+            }
+            
+
+            
+        }
+        
+        .dropdown-menu{
+            left: -43px !important;           
+            margin-bottom: unset !important;
+            width: 200px;
+
+                .item-favoritos{
+                list-style: none;
+                display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                cursor: pointer;
+                padding: .5em 1em;
+
+                &:hover{
+                    background-color: #dddddd;
+                }
+
+                .delete{
+                    cursor: pointer;
+                }
+
+            }                
+
+           
         }
     }
 
     
 }
 
-.body{
-    margin-top: 8em;
-}
 
 /*Character & Planets container styles*/
 .container-body{
@@ -79,6 +116,7 @@ nav{
         width: 80%;
         text-transform: uppercase;
         font-size: 1.5rem;
+        font-weight: 500;
         text-align: left;
         margin-bottom: 1.5em;
         color: #fff;
@@ -130,21 +168,152 @@ nav{
 }
 
 
-
 /*Card styles*/
 
 .card{
     .btn-container{
         button{
             color: #fff;
-            font-weight: 600;
+            font-weight: 400;
+        }
+    }
+}
+
+
+/*Details styles*/
+.details-body{
+    margin-top: 7.5em;
+
+    .wrapper{
+        margin: 0 1em;
+        position: relative;
+
+
+        .detalle-container{
+            width: 100%;
+            height: 100%;
+        
+            .pic{
+
+                img{
+                    width: 100%;
+                    height: 300px;
+                    object-fit: cover; 
+                    position: relative;
+                    z-index: 1;
+
+
+                    @media all and (min-width: 1024px){
+                        &{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                    
+                }
+            }
+
+            .detalles{
+                background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+                border: solid 1px rgba(255, 255, 255, 0.5);
+                border-radius: 0 0 15px 15px;
+                padding: 1em;
+                position: relative;
+                animation: despliegue .7s ease-out;
+                backdrop-filter: blur(2px);            
+
+
+                    // @keyframes despliegue{
+                    //     from{
+                    //         top: -300px;
+                    //     }
+
+                    //     to{
+                    //         top: 0;
+                    //     }
+                    // }
+                
+                    h1{
+                        text-transform: uppercase;
+                        color: #fff;
+                    }                                   
+
+                    .arrow{
+                            display: none;
+                    }
+
+                    .heart-container{
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-end;
+
+                        button{
+                            background-color: transparent;                            
+                            border: none;
+
+                            &:disabled{
+                                color: #4b4b4b;
+                            }
+                        }                        
+                        
+                    }
+
+                @media all and (min-width: 1024px){
+                    &{
+                        width: 60%;
+                        border-radius: 0 15px 15px 0;
+                        border-top: solid 1px rgba(255, 255, 255, 0.7);
+                        border-right: solid 1px rgba(255, 255, 255, 0.7);
+                        border-bottom: solid 1px rgba(255, 255, 255, 0.7);
+
+                        display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                        padding: 2em;
+                    }
+
+                    & > p{
+                        font-size: 1.5rem;
+                        text-transform: capitalize;
+                    }
+                }
+                
+
+            }
+
+            @media all and (min-width: 1024px){
+               &{
+                   width: 80%;
+                   height: 65%;
+                   display: flex;
+                   justify-content: center;
+               }
+            }
+
+
+        }
+
+        @media all and (min-width: 1024px){
+            &{
+                width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            }
+        }
+        
+    }
+    
+    @media all and (min-width: 1024px){
+        &{
+            margin-top: 4em;
+            display: flex;
+                justify-content: center;
         }
     }
 }
 
 
 
-/*Details styles*/
-.details-body{
-    margin-top: 8em;
-}

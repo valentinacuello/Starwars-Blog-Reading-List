@@ -21,7 +21,7 @@ const CardPl = props => {
 			<div className="card-body">
 				<h5 className="card-title">{props.name}</h5>
 				<div className="btn-container d-flex justify-content-between">
-					<Link to={"/single/" + props.index}>
+					<Link to={"/single/" + props.id}>
 						<button type="button" className="btn bg-dark">
 							Read more!
 						</button>
@@ -37,8 +37,7 @@ const CardPl = props => {
 
 CardPl.propTypes = {
 	name: PropTypes.string,
-	id: PropTypes.string,
-	index: PropTypes.string
+	id: PropTypes.string
 };
 
 export default CardPl;

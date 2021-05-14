@@ -34,25 +34,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 
-				try {
-					const personajeDetalles = getStore().personajes;
-					Promise.all(
-						personajeDetalles.map(element => {
-							return new Promise(resolve => {
-								fetch(element.url).then(response => {
-									return new Promise(() => {
-										response.json().then(data => {
-											element.properties = data.result.properties;
-										});
+				const personajeDetalles = getStore().personajes;
+				await Promise.all(
+					personajeDetalles.map(element => {
+						return new Promise(resolve => {
+							fetch(element.url).then(response => {
+								return new Promise(() => {
+									response.json().then(data => {
+										element.properties = data.result.properties;
 									});
-								});
+								}).catch(error => console.log(error));
 							});
-						})
-					);
-					setStore({ personajes: personajeDetalles });
-				} catch (error) {
-					console.log(error);
-				}
+						});
+					})
+				);
+				setStore({ personajes: personajeDetalles });
+
 				// https://dev.to/askrishnapravin/for-loop-vs-map-for-making-multiple-api-calls-3lhd
 				try {
 					const planetaDetalles = getStore().planetas;
@@ -92,7 +89,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			agregarFav: nuevoFav => {
 				const store = getStore();
-				let listaNuevaFavs = [...store.favoritos, nuevoFav];
+				let listaNuevaFavs = [];
+				if (store.favoritos.includes(nuevoFav)) {
+					listaNuevaFavs = store.favoritos;
+					let indexFav = listaNuevaFavs.indexOf(nuevoFav);
+					listaNuevaFavs.splice(indexFav, 1);
+				} else {
+					listaNuevaFavs = [...store.favoritos, nuevoFav];
+				}
 				setStore({ favoritos: listaNuevaFavs });
 				console.log(store.favoritos);
 			}

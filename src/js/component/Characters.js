@@ -5,13 +5,6 @@ import { Context } from "../store/appContext";
 
 const Characters = () => {
 	const { store, actions } = useContext(Context);
-	const [gender, setGender] = useState("LOL");
-
-	useEffect(() => {
-		if (store.personajes.length > 0 && store.personajes[0].properties != null) {
-			setGender(store.personajes[0].properties.gender);
-		}
-	}, []);
 
 	return (
 		<div className="container-body">
@@ -20,15 +13,7 @@ const Characters = () => {
 				<div className="row">
 					<div className="cards-list">
 						{store.personajes.map((personaje, index) => {
-							return (
-								<CardCh
-									key={index}
-									name={personaje.name}
-									id={personaje.uid}
-									index={personaje.uid}
-									gender={gender}
-								/>
-							);
+							return <CardCh key={index} name={personaje.name} id={personaje.uid} />;
 						})}
 					</div>
 				</div>

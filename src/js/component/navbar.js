@@ -6,12 +6,14 @@ import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Context } from "../store/appContext";
+import { Trash } from "react-bootstrap-icons";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	const [listaFavs, setListaFavs] = useState([]);
+
 	return (
-		<nav className="">
+		<nav className="nav-bar">
 			<Link to="/">
 				<img src="https://logos-marcas.com/wp-content/uploads/2020/11/Star-Wars-Logo.png" />
 			</Link>
@@ -25,13 +27,16 @@ export const Navbar = () => {
 					aria-expanded="false">
 					Favorites
 				</button>
-				<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<ul>
-						{store.favoritos.map((favorito, index) => {
-							return <li key={index}>{favorito}</li>;
-						})}
-					</ul>
-				</div>
+
+				<ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					{store.favoritos.map((favorito, index) => {
+						return (
+							<li key={index} className="item-favoritos">
+								{favorito} <Trash className="delete" />{" "}
+							</li>
+						);
+					})}
+				</ul>
 			</div>
 		</nav>
 	);
