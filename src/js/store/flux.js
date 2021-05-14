@@ -34,6 +34,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 
+				//PERSONAJES - agrego  más info
 				const personajeDetalles = getStore().personajes;
 				await Promise.all(
 					personajeDetalles.map(element => {
@@ -51,6 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ personajes: personajeDetalles });
 
 				// https://dev.to/askrishnapravin/for-loop-vs-map-for-making-multiple-api-calls-3lhd
+				//PLANETAS - agrego más info
 				try {
 					const planetaDetalles = getStore().planetas;
 					Promise.all(

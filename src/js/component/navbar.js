@@ -29,13 +29,15 @@ export const Navbar = () => {
 				</button>
 
 				<ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					{store.favoritos.map((favorito, index) => {
-						return (
-							<li key={index} className="item-favoritos">
-								{favorito} <Trash className="delete" />{" "}
-							</li>
-						);
-					})}
+					{store.favoritos.length == 0
+						? "No hay favoritos"
+						: store.favoritos.map((favorito, index) => {
+								return (
+									<li key={index} className="item-favoritos">
+										{favorito} <Trash className="delete" />{" "}
+									</li>
+								);
+						  })}
 				</ul>
 			</div>
 		</nav>
