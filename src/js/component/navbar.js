@@ -11,6 +11,7 @@ import { Trash } from "react-bootstrap-icons";
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	const [listaFavs, setListaFavs] = useState([]);
+	const [mouseOver, setMouseOver] = useState();
 
 	return (
 		<nav className="nav-bar">
@@ -33,8 +34,19 @@ export const Navbar = () => {
 						? "No hay favoritos"
 						: store.favoritos.map((favorito, index) => {
 								return (
-									<li key={index} className="item-favoritos">
-										{favorito} <Trash className="delete" />{" "}
+									<li
+										key={index}
+										className="item-favoritos"
+										onMouseOver={() => {
+											setMouseOver(index);
+										}}
+										onMouseOut={() => {
+											setMouseOver();
+										}}>
+										{favorito}{" "}
+										<button onClick={() => actions.eliminarFav(index)} className="btn-delete">
+											<Trash className="delete" />
+										</button>{" "}
 									</li>
 								);
 						  })}

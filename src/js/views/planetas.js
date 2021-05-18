@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { ArrowLeft, Heart, HeartFill } from "react-bootstrap-icons";
 
-export const Single = props => {
+export const Planetas = props => {
 	const { store, actions } = useContext(Context);
 	const [isHovered, setIsHovered] = useState(false);
 	const params = useParams();
@@ -16,28 +16,30 @@ export const Single = props => {
 				<div className="detalle-container">
 					<div className="pic">
 						<img
-							src={`https://starwars-visualguide.com/assets/img/planets/${store.planetas[id].uid}.jpg`}
+							src={
+								store.planetas[id].uid != 1
+									? `https://starwars-visualguide.com/assets/img/planets/${
+											store.planetas[id].uid
+									  }.jpg`
+									: "https://starwars-visualguide.com/assets/img/planets/13.jpg"
+							}
 						/>
 						<div className="detalles-bg" />
 					</div>
 					<div className="detalles">
-						<h1>{store.personajes[id].name}</h1>
+						<h1>{store.planetas[id].name}</h1>
 						<p>
 							“When gone am I, the last of the Jedi will you be. The Force runs strong in your family.
 							Pass on what you have learned.”
 						</p>
-						<p>Birth year: {store.personajes[id].properties.birth_year} </p>
-						<p>Gender: {store.personajes[id].properties.gender}</p>
-						<p>Hair color: {store.personajes[id].properties.hair_color}</p>
-						<p>Eye color: {store.personajes[id].properties.eye_color}</p>
 						<button
-							disabled={store.favoritos.includes(store.personajes[id].name)}
+							disabled={store.favoritos.includes(store.planetas[id].name)}
 							onMouseEnter={() => setIsHovered(!isHovered)}
 							onMouseLeave={() => setIsHovered(!isHovered)}
 							onClick={() => {
-								actions.agregarFav(store.personajes[id].name);
+								actions.agregarFav(store.planetas[id].name);
 							}}>
-							{store.favoritos.includes(store.personajes[id].name) ? (
+							{store.favoritos.includes(store.planetas[id].name) ? (
 								<HeartFill style={{ color: "yellow", fontSize: 20, marginRight: 10 }} />
 							) : isHovered ? (
 								<HeartFill style={{ color: "#4b4b4b", fontSize: 20, marginRight: 10 }} />

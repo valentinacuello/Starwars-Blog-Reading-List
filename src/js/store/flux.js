@@ -35,24 +35,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 				//PERSONAJES - agrego  más info
-				const personajeDetalles = getStore().personajes;
-				await Promise.all(
-					personajeDetalles.map(element => {
-						return new Promise(resolve => {
-							fetch(element.url).then(response => {
-								return new Promise(() => {
-									response.json().then(data => {
-										element.properties = data.result.properties;
+				try {
+					const personajeDetalles = getStore().personajes;
+					Promise.all(
+						personajeDetalles.map(element => {
+							return new Promise(resolve => {
+								fetch(element.url).then(response => {
+									return new Promise(() => {
+										response.json().then(data => {
+											element.properties = data.result.properties;
+										});
 									});
-								}).catch(error => console.log(error));
+								});
 							});
-						});
-					})
-				);
-				setStore({ personajes: personajeDetalles });
+						})
+					);
+					setStore({ personajes: personajeDetalles });
+				} catch (error) {
+					console.log(error);
+				}
 
-				// https://dev.to/askrishnapravin/for-loop-vs-map-for-making-multiple-api-calls-3lhd
-				//PLANETAS - agrego más info
 				try {
 					const planetaDetalles = getStore().planetas;
 					Promise.all(
@@ -74,33 +76,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			},
-
 			agregarFav: nuevoFav => {
 				const store = getStore();
-				let listaNuevaFavs = [];
+				let listaFavs = [];
 				if (store.favoritos.includes(nuevoFav)) {
-					listaNuevaFavs = store.favoritos;
-					let indexFav = listaNuevaFavs.indexOf(nuevoFav);
-					listaNuevaFavs.splice(indexFav, 1);
+					listaFavs = store.favoritos;
+					let indexFav = listaFavs.indexOf(nuevoFav);
+					listaFavs.splice(indexFav, 1);
 				} else {
-					listaNuevaFavs = [...store.favoritos, nuevoFav];
+					listaFavs = [...store.favoritos, nuevoFav];
 				}
-				setStore({ favoritos: listaNuevaFavs });
+				setStore({ favoritos: listaFavs });
 				console.log(store.favoritos);
+			},
+
+			eliminarFav: favIndex => {
+				const store = getStore();
+				let listaNuevaFavs = store.favoritos.filter((favorito, index) => {
+					if (favIndex != index) {
+						return favorito;
+					}
+				});
+
+				setStore({ favoritos: listaNuevaFavs });
 			}
 		}
 	};
